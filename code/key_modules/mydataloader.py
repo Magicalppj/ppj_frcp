@@ -51,8 +51,6 @@ class MultiViewDataset(BaseDataset):
         self.image_files = list(filter(lambda x: '.png' in x or '.jpg' in x, all_files))
         self.image_files.sort()
 
-        # self.transform = transforms.Compose(
-        #     [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])  # rgb
         self.transform = transform
         print('Using {} dataset with {} normalization!'.format(dataset_dir, norm))
 
@@ -225,7 +223,8 @@ def fetch_concat_dataset(params):
     :param params:
     :return:
     '''
-    root_dir = '../../Fundamental Matrix/blender_dataset' # 存放数据集的根目录
+    # root_dir = '../../Fundamental Matrix/blender_dataset' # 存放数据集的根目录
+    root_dir = '../blender_dataset' # 存放数据集的根目录
     normalization = params.normalization # F的处理方式
     lable_mode = params.label_mode # 数据集返回label的方式
 
@@ -271,14 +270,16 @@ def load_data_iter(params=None, gpu_counts=None):
 
     print('Training dataset size: {}, testing dataset size: {}'.format(len(cat_train_dataset), len(cat_test_dataset)))
 
-    batch_size = int(params.batch_size / gpu_counts)  # 在参数设置的时候为了能完全复现实验，我们应保证所有GPU的batchnorm共统计样本数相同
-    num_workers = params.num_workers
+    # 在参数设置的时候为了能完全复现实验，我们应保证所有GPU的batchnorm共统计样本数相同
+    # 如果是distributed训练，则需要把batch_size/gpu counts
+    batch_size = int(params.batch_size)
+    num_workers = params.num_workers * gpu_counts  # 因为是单线程，所以需要乘以gpu数量，distributed则不用
 
 
     # 因为不是distributed训练模式，只有1个主进程，所以num worker需要乘GPU数量
-    train_iter = DataLoader(cat_train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers*gpu_counts,
+    train_iter = DataLoader(cat_train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers,
                             pin_memory=True)
-    test_iter = DataLoader(cat_test_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers*gpu_counts,
+    test_iter = DataLoader(cat_test_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers,
                            pin_memory=True)
 
     return train_iter,test_iter

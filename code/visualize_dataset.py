@@ -9,7 +9,6 @@ from evaluate import plot_raw_image_pair
 from key_modules import mydataloader
 
 if __name__ =="__main__":
-    os.chdir(r'../../Fundamental Matrix/code')
 
     print(os.getcwd())
     experiment_dir = r'../experiments/base' # 指定实验文件夹，目录下应该存在params.json文件
@@ -31,12 +30,6 @@ if __name__ =="__main__":
     index = range(start ,start+10)
     tensor_to_PIL = torchvision.transforms.ToPILImage()
     for i in index:
-        # img1 =  np.asarray(tensor_to_pil(train_set[i][0][:3]))
-
-        # img2 =  np.asarray(tensor_to_pil(train_set[i][0][3:]))
-        # img1,img2 = train_set.get_raw_imgs(i)
-        # plot_raw_image_pair(img1,img2,title=i)
-
-        img1_PIL = tensor_to_PIL(train_set[i][0][:3])
-        img2_PIL = tensor_to_PIL(train_set[i][0][3:])
-        img1_PIL.show()
+        img1 =  np.asarray(tensor_to_PIL(train_set[i][0][:3]))
+        img2 =  np.asarray(tensor_to_PIL(train_set[i][0][3:]))
+        plot_raw_image_pair(img1,img2,title=i)

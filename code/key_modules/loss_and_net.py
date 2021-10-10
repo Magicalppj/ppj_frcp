@@ -20,7 +20,7 @@ def fetch_net_and_loss(params, device, evaluate_mode=False):
 
     # 网络实例化
     first_dataset_path = re.split('[ ,]', params.dataset)[0]
-    camera_matrix_path = os.path.join(r'../../Fundamental Matrix/blender_dataset', first_dataset_path, 'camera_matrix.npy')  # 相机内参位置
+    camera_matrix_path = os.path.join(r'../blender_dataset', first_dataset_path, 'camera_matrix.npy')  # 相机内参位置
     if evaluate_mode:
         params.normalization = 'ETR'
     net = model(out_features=params.resnet_out_features, output_mode=params.label_mode, norm=params.normalization,

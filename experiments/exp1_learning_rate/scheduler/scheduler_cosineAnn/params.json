@@ -1,5 +1,5 @@
 {
-    "learning_rate": 0.001,
+    "learning_rate": 0.0001,
     "batch_size": 60,
     "num_epochs": 500,
     "dropout_rate": 0.8,
@@ -15,13 +15,13 @@
     "loss": "loss_Rt_epi",
     "batch_norm_to_instance_norm": true,
     "normalize_R": false,
-    "time": "Fri Oct  8 23:58:40 2021",
-    "base_experiment_dir": "../experiments/exp10_learning_rate/scheduler/scheduler_step_cosineAnnWarm_T4",
+    "time": "Tue Oct  5 21:18:59 2021",
+    "base_experiment_dir": "../experiments/exp10_learning_rate",
     "freeze_layers": false,
     "pretrained": false,
     "cudnn_benchmark": false,
     "optimizer": "Adam",
-    "scheduler": "step_cosineAnnWarm_T4",
+    "scheduler": "cosineAnn",
     "warmup_lr": false,
     "cuda_seed": false,
     "transform_type": "basic"

@@ -174,8 +174,8 @@ def computeF(pts1, pts2, mode=cv.FM_8POINT, match_threshold=1):
     pass
 
 
-def get_sample_sequence(root_dir=r'../dataset', dataset_dir='Original_dataset', file_name='sample_sequence.npy',
-                        recreate=False, size=3000):
+def get_image_dir_and_files(root_dir=r'../dataset', dataset_dir='Original_dataset', file_name='sample_sequence.npy',
+                            recreate=False, size=3000):
     """
     生成数据集样本的采样序列，返回图片文件名列表以及（N，2）的索引序列
     :param root_dir:
@@ -240,8 +240,8 @@ def blender_create_MultiView_label(root_dir, images_dir='MultiView_dataset'):
     根据现有的sample sequence（一般是通过原始数据集产生）
     """
 
-    images_dir_path, image_files = get_sample_sequence(root_dir=root_dir, dataset_dir=images_dir,
-                                                                        )
+    images_dir_path, image_files = get_image_dir_and_files(root_dir=root_dir, dataset_dir=images_dir,
+                                                           )
     label_dir_path = os.path.join(root_dir, images_dir, 'label')
     if os.path.isdir(label_dir_path):
         print('Clearing label dir! ', label_dir_path)
@@ -338,12 +338,9 @@ if __name__ == '__main__':
     # 修改start--------------------
     dataset_dir = 'SmallAngle_dataset'
     create_label = True
-    # create_label = False
+    create_label = False
     dataset_path = os.path.join(root_dir, dataset_dir)
     # 修改end-------------------
-
-
-
 
     from key_modules import mydataloader
 
