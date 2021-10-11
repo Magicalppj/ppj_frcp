@@ -40,6 +40,7 @@ blender_dataset
 * camera_matrix.npy为相机内参矩阵
 * samples是数据集的样本的示例图片
 * label以及Rt_label则分别存放F,feature points和Rt的标签
+* 数据集目录下的pkl文件是储存blender的material和object信息的，不需要使用
 
 
 **数据集的使用方式**
@@ -103,7 +104,7 @@ dataloader的代码都放在了Project/code/key_modules/mydataloader.py中
 ### 5. train demo
 为了简单的演示整个训练的流程，我写了一个train_demo.py,可以参考该文件调用函数的API
 ```shell
-cd RelativeCameraPose/code
+cd Project/code
 python train_demo.py -gpu=0,1,2  -exp=../experiments/base
 ```
 
@@ -117,7 +118,7 @@ evaluate网络性能的代码在Project/code/evaluate.py中
 
 并且生成markdown表格results.md文件
 ```shell
-cd RelativeCameraPose/code
+cd Project/code
 python evalute_cmds.py -d=0 -parent=../experiments/exp1_learning_rate
 ```
 

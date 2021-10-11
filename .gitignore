@@ -1,2 +1,14 @@
 # 项目排除路径
 /blender_dataset/
+*.rar
+*.pyc
+*.pkl
+*.jpg
+*.jpeg
+*.png
+*.swp
+*.tar
+*.npy
+*.mp4
+*.pth
+*.pt
